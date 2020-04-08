@@ -17,16 +17,16 @@
 name "pcaprub"
 default_version "0.12.4"
 
+dependency "ruby"
+dependency "rubygems"
+
 if windows?
-  dependency "ruby-windows"
   dependency "ruby-windows-devkit"
   dependency "winpcap-devpack"
 else
-  dependency "ruby"
   dependency "libpcap"
 end
 
-dependency "rubygems"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)

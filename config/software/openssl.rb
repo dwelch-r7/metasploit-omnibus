@@ -60,6 +60,10 @@ relative_path "openssl-#{version}"
 build do
 
   env = with_standard_compiler_flags(with_embedded_path)
+
+  # mingw_type = 'mingw64'
+  # command "perl Configure #{mingw_type} zlib-dynamic shared enable-weak-ssl-ciphers enable-ssl3"
+
   if aix?
     env["M4"] = "/opt/freeware/bin/m4"
   elsif freebsd?
@@ -140,7 +144,7 @@ build do
     patch source: "openssl-1.0.2k-no-bang.patch", env: patch_env, plevel: 1
   end
 
-  if windows?
+  if windows? && version.start_with?("1.0.1")
     # Patch Makefile.org to update the compiler flags/options table for mingw.
     patch source: "openssl-1.0.1q-fix-compiler-flags-table-for-msys.patch", env: env
   end
@@ -151,9 +155,9 @@ build do
 
   configure_command = configure_args.unshift(configure_cmd).join(" ")
 
-  command configure_command, env: env, in_msys_bash: true
+  command configure_command, env: env
 
-  if windows?
+  if windows? && version == '1.0.1j'
     patch source: "openssl-1.0.1j-windows-relocate-dll.patch", env: env
   end
 
@@ -170,5 +174,5 @@ build do
     # Bug Ref: http://rt.openssl.org/Ticket/Display.html?id=2986&user=guest&pass=guest
     command "sudo /usr/sbin/slibclean", env: env
   end
-  make "install", env: env
+  make "install_sw", env: env
 end

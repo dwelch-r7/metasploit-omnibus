@@ -13,6 +13,9 @@ else
   dependency "metasploit-framework-wrappers"
 end
 
+# dependency "openssl"
+# dependency "ruby"
+
 exclude "**/.git"
 exclude "**/bundler/git"
 

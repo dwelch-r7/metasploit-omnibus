@@ -20,12 +20,7 @@ license "MIT"
 license_file "https://raw.githubusercontent.com/bundler/bundler/master/LICENSE.md"
 skip_transitive_dependency_licensing true
 
-if windows?
-  dependency "ruby-windows"
-  dependency "rubygems"
-else
-  dependency "rubygems"
-end
+dependency "rubygems"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
