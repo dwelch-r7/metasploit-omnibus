@@ -3,8 +3,9 @@ name "sqlite3-gem"
 default_version ""
 
 if windows?
-  dependency "ruby-windows"
-  dependency "ruby-windows-devkit"
+  dependency "ruby"
+  # dependency "ruby-windows"
+  # dependency "ruby-windows-devkit"
   dependency "rubygems"
   dependency "bundler"
   gem_config = " --with-sqlite3-include=#{install_dir}/embedded/include --with-sqlite3-lib=#{install_dir}/embedded/lib"
@@ -13,7 +14,9 @@ if windows?
   build do
     env = with_standard_compiler_flags(with_embedded_path)
     msys_dir = "#{install_dir}/embedded/msys64"
-    command "#{msys_dir}/usr/bin/bash.exe -lc 'pacman --noconfirm -Syuu mingw-w64-x86_64-sqlite3'", env: env
+    #install manually, doesn't work currently (wrong shell? not finding right directory?)
+    # had to reboot after installing, error forking bash, error disappears after reboot
+    # command "#{msys_dir}/usr/bin/bash.exe -lc 'pacman --noconfirm -Syuu mingw-w64-x86_64-sqlite3'", env: env
     bundle "config build.sqlite3" \
       "#{gem_config}", env: env
   end

@@ -107,6 +107,7 @@ elsif solaris_11?
   env["CPPFLAGS"] << " -D_XOPEN_SOURCE=600 -D_XPG6"
 elsif windows?
   env["CFLAGS"] = "-I#{install_dir}/embedded/include -DFD_SETSIZE=2048"
+  env["LDFLAGS"] << " -fstack-protector"
   if windows_arch_i386?
     # 32-bit windows can't compile ruby with -O2 due to compiler bugs.
     env["CFLAGS"] << " -m32 -march=i686 -O"

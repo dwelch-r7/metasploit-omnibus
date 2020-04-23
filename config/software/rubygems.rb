@@ -20,12 +20,12 @@ license "MIT"
 license_file "https://raw.githubusercontent.com/rubygems/rubygems/master/LICENSE.txt"
 skip_transitive_dependency_licensing true
 
+dependency "ruby"
+
 if windows?
-  dependency "ruby-windows"
-  dependency "ruby-windows-devkit"
+  # dependency "ruby-windows"
+  # dependency "ruby-windows-devkit"
   dependency "ruby-windows-msys2"
-else
-  dependency "ruby"
 end
 
 default_version "3.0.6"

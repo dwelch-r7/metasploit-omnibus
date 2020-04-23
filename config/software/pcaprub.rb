@@ -21,7 +21,7 @@ dependency "ruby"
 dependency "rubygems"
 
 if windows?
-  dependency "ruby-windows-devkit"
+  # dependency "ruby-windows-devkit"
   dependency "winpcap-devpack"
 else
   dependency "libpcap"

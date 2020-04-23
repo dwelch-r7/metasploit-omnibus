@@ -21,8 +21,9 @@ version "4.1.2" do
   source md5: "bae2236af062b0900ad1416b2c4878b9"
 end
 
-dependency "ruby-windows"
-dependency "ruby-windows-devkit"
+dependency "ruby"
+# dependency "ruby-windows"
+# dependency "ruby-windows-devkit"
 
 relative_path "WpdPack"
 
