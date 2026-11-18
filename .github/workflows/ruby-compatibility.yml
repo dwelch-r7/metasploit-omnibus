@@ -1,0 +1,31 @@
+name: Ruby tooling compatibility
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  tooling:
+    name: Omnibus tooling - Ruby ${{ matrix.ruby }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.4', '4.0', '3.5.0-preview1']
+    env:
+      BUNDLE_WITHOUT: development
+      BUNDLE_FORCE_RUBY_PLATFORM: "${{ contains(matrix.ruby, 'preview') && 'true' || 'false' }}"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Load Omnibus and project definitions
+        run: |
+          bundle exec omnibus --version
+          bundle exec omnibus list
